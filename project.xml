@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+hi
+<project>
+
+	<meta title="Game" version="1.0.0" />
+	<app main="Main" path="Export" file="Game" />
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	<haxelib name="actuate" />
+	
+	<library path="Assets/lib.swf" preload="true" />
+</project>

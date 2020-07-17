@@ -5,14 +5,14 @@ import WebSocket from 'ws';
 
 class Server {
     address: string;
-    clients: Array<Client>;
     port: number;
+    clients: Array<Client>;
     wss: WebSocket.Server;
 
     constructor() {
-        this.address = '127.0.0.1';
-        this.clients = [];
+        this.address = 'localhost';
         this.port = 8080;
+        this.clients = [];
         this.wss = new WebSocket.Server({ port: this.port });
 
         this.init();

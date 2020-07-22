@@ -2,39 +2,39 @@ package;
 
 import openfl.Assets;
 import openfl.Lib;
-
 import openfl.display.MovieClip;
+import openfl.display.Stage;
 import openfl.display.Sprite;
-
 import openfl.events.Event;
-import openfl.events.MouseEvent;
-
-import openfl.geom.Point;
 
 class Main extends Sprite {
-    private static inline var NOMINAL_WIDTH: Int = 1600;
-    private static inline var NOMINAL_HEIGHT: Int = 1200;
-    
-    private var player: Player;
+    public var NOMINAL_WIDTH: Int = 1600;
+    public var NOMINAL_HEIGHT: Int = 1200;
+
+    private var chat: Chat;
+    public var background: Background;
+
+    private var client: Client;
 
 	public function new() {
         super();
 
         stage.addEventListener(Event.RESIZE, onResize);
-        
-        player = new Player('Preston');
 
-        addChild(player);
-
-        stage.addEventListener(MouseEvent.CLICK, handleMovement);
+        client = new Client(this);
     }
-    
-    private function handleMovement(?event: MouseEvent): Void {
-        if (event.currentTarget == event.target) {
-            var coords: Point = globalToLocal(new Point(event.stageX, event.stageY));
 
-            player.move(coords.x, coords.y);
-        }
+    public function setupExtras(): Void {
+        chat = new Chat(this);
+        background = new Background(this);
+
+        var ordering = new MovieClip();     // allows us to ensure the order of the background and chat
+
+        ordering.addChild(background.fill);
+        ordering.addChild(chat);
+        ordering.addChild(background.border);
+
+        addChild(ordering);
     }
 
     private function onResize(?event: Event): Void {
